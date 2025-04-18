@@ -23,6 +23,12 @@
 ////////////////////////////////////////////////////////////
 
 ////////////////////////////////////////////////////////////
+// ArYa Modifications
+// 1.   Joystick Caps and Joystick State have been moved
+//      to Joystick.hpp so namespace has changed to reflect
+////////////////////////////////////////////////////////////
+
+////////////////////////////////////////////////////////////
 // Headers
 ////////////////////////////////////////////////////////////
 #include <SFML/Window/InputImpl.hpp>
@@ -37,8 +43,8 @@
 
 namespace
 {
-sf::priv::EnumArray<sf::Keyboard::Key, sf::Keyboard::Scancode, sf::Keyboard::KeyCount> keyToScancodeMapping; ///< Mapping from Key to Scancode
-sf::priv::EnumArray<sf::Keyboard::Scancode, sf::Keyboard::Key, sf::Keyboard::ScancodeCount> scancodeToKeyMapping; ///< Mapping from Scancode to Key
+sf::EnumArray<sf::Keyboard::Key, sf::Keyboard::Scancode, sf::Keyboard::KeyCount> keyToScancodeMapping; ///< Mapping from Key to Scancode
+sf::EnumArray<sf::Keyboard::Scancode, sf::Keyboard::Key, sf::Keyboard::ScancodeCount> scancodeToKeyMapping; ///< Mapping from Scancode to Key
 
 sf::Keyboard::Key virtualKeyToSfKey(UINT virtualKey)
 {

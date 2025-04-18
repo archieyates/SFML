@@ -22,6 +22,12 @@
 //
 ////////////////////////////////////////////////////////////
 
+////////////////////////////////////////////////////////////
+// ArYa Modifications
+// 1.   Joystick Caps and Joystick State have been moved
+//      to Joystick.hpp so namespace has changed to reflect
+////////////////////////////////////////////////////////////
+
 #pragma once
 
 ////////////////////////////////////////////////////////////
@@ -101,7 +107,7 @@ public:
     /// \return Joystick capabilities
     ///
     ////////////////////////////////////////////////////////////
-    [[nodiscard]] JoystickCaps getCapabilities() const;
+    [[nodiscard]] Joystick::JoystickCaps getCapabilities() const;
 
     ////////////////////////////////////////////////////////////
     /// \brief Get the joystick identification
@@ -117,7 +123,7 @@ public:
     /// \return Joystick state
     ///
     ////////////////////////////////////////////////////////////
-    [[nodiscard]] JoystickState update();
+    [[nodiscard]] Joystick::JoystickState update();
 
     ////////////////////////////////////////////////////////////
     /// \brief Perform the global initialization of the joystick module (DInput)
@@ -169,7 +175,7 @@ public:
     /// \return Joystick capabilities
     ///
     ////////////////////////////////////////////////////////////
-    [[nodiscard]] JoystickCaps getCapabilitiesDInput() const;
+    [[nodiscard]] Joystick::JoystickCaps getCapabilitiesDInput() const;
 
     ////////////////////////////////////////////////////////////
     /// \brief Update the joystick and get its new state (DInput, Buffered)
@@ -177,7 +183,7 @@ public:
     /// \return Joystick state
     ///
     ////////////////////////////////////////////////////////////
-    [[nodiscard]] JoystickState updateDInputBuffered();
+    [[nodiscard]] Joystick::JoystickState updateDInputBuffered();
 
     ////////////////////////////////////////////////////////////
     /// \brief Update the joystick and get its new state (DInput, Polled)
@@ -185,7 +191,7 @@ public:
     /// \return Joystick state
     ///
     ////////////////////////////////////////////////////////////
-    [[nodiscard]] JoystickState updateDInputPolled();
+    [[nodiscard]] Joystick::JoystickState updateDInputPolled();
 
 private:
     ////////////////////////////////////////////////////////////
@@ -220,7 +226,7 @@ private:
     EnumArray<Joystick::Axis, int, Joystick::AxisCount> m_axes{}; //!< Offsets to the bytes containing the axes states, -1 if not available
     std::array<int, Joystick::ButtonCount> m_buttons{}; //!< Offsets to the bytes containing the button states, -1 if not available
     Joystick::Identification m_identification; //!< Joystick identification
-    JoystickState            m_state;          //!< Buffered joystick state
+    Joystick::JoystickState  m_state;          //!< Buffered joystick state
     bool                     m_buffered{}; //!< `true` if the device uses buffering, `false` if the device uses polling
 };
 

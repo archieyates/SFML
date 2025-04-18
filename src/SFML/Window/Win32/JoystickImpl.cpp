@@ -23,6 +23,12 @@
 ////////////////////////////////////////////////////////////
 
 ////////////////////////////////////////////////////////////
+// ArYa Modifications
+// 1.   Joystick Caps and Joystick State have been moved
+//      to Joystick.hpp so namespace has changed to reflect
+////////////////////////////////////////////////////////////
+
+////////////////////////////////////////////////////////////
 // Headers
 ////////////////////////////////////////////////////////////
 #include <SFML/Window/JoystickImpl.hpp>
@@ -303,12 +309,12 @@ void JoystickImpl::close()
 }
 
 ////////////////////////////////////////////////////////////
-JoystickCaps JoystickImpl::getCapabilities() const
+Joystick::JoystickCaps JoystickImpl::getCapabilities() const
 {
     if (directInput)
         return getCapabilitiesDInput();
 
-    JoystickCaps caps;
+    Joystick::JoystickCaps caps;
 
     caps.buttonCount = std::min(m_caps.wNumButtons, Joystick::ButtonCount);
 
@@ -333,7 +339,7 @@ Joystick::Identification JoystickImpl::getIdentification() const
 
 
 ////////////////////////////////////////////////////////////
-JoystickState JoystickImpl::update()
+Joystick::JoystickState JoystickImpl::update()
 {
     if (directInput)
     {
@@ -345,7 +351,7 @@ JoystickState JoystickImpl::update()
         return updateDInputPolled();
     }
 
-    JoystickState state;
+    Joystick::JoystickState state;
 
     // Get the current joystick state
     JOYINFOEX pos;
@@ -522,7 +528,7 @@ bool JoystickImpl::openDInput(unsigned int index)
 
     m_deviceCaps        = {};
     m_deviceCaps.dwSize = sizeof(DIDEVCAPS);
-    m_state             = JoystickState();
+    m_state             = Joystick::JoystickState();
     m_buffered          = false;
 
     // Search for a joystick with the given index in the connected list
@@ -838,9 +844,9 @@ void JoystickImpl::closeDInput()
 
 
 ////////////////////////////////////////////////////////////
-JoystickCaps JoystickImpl::getCapabilitiesDInput() const
+Joystick::JoystickCaps JoystickImpl::getCapabilitiesDInput() const
 {
-    JoystickCaps caps;
+    Joystick::JoystickCaps caps;
 
     // Count how many buttons have valid offsets
     caps.buttonCount = 0;
@@ -863,7 +869,7 @@ JoystickCaps JoystickImpl::getCapabilitiesDInput() const
 
 
 ////////////////////////////////////////////////////////////
-JoystickState JoystickImpl::updateDInputBuffered()
+Joystick::JoystickState JoystickImpl::updateDInputBuffered()
 {
     // If we don't make it to the end of this function, mark the device as disconnected
     m_state.connected = false;
@@ -957,9 +963,9 @@ JoystickState JoystickImpl::updateDInputBuffered()
 
 
 ////////////////////////////////////////////////////////////
-JoystickState JoystickImpl::updateDInputPolled()
+Joystick::JoystickState JoystickImpl::updateDInputPolled()
 {
-    JoystickState state;
+    Joystick::JoystickState state;
 
     if (m_device)
     {

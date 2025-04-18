@@ -23,6 +23,12 @@
 ////////////////////////////////////////////////////////////
 
 ////////////////////////////////////////////////////////////
+// ArYa Modifications
+// 1.   Joystick Caps and Joystick State have been moved
+//      to Joystick.hpp so namespace has changed to reflect
+////////////////////////////////////////////////////////////
+
+////////////////////////////////////////////////////////////
 // Headers
 ////////////////////////////////////////////////////////////
 #include <SFML/Window/JoystickManager.hpp>
@@ -41,7 +47,7 @@ JoystickManager& JoystickManager::getInstance()
 
 
 ////////////////////////////////////////////////////////////
-const JoystickCaps& JoystickManager::getCapabilities(unsigned int joystick) const
+const Joystick::JoystickCaps& JoystickManager::getCapabilities(unsigned int joystick) const
 {
     assert(joystick < Joystick::Count && "Joystick index must be less than Joystick::Count");
     return m_joysticks[joystick].capabilities;
@@ -49,7 +55,7 @@ const JoystickCaps& JoystickManager::getCapabilities(unsigned int joystick) cons
 
 
 ////////////////////////////////////////////////////////////
-const JoystickState& JoystickManager::getState(unsigned int joystick) const
+const Joystick::JoystickState& JoystickManager::getState(unsigned int joystick) const
 {
     assert(joystick < Joystick::Count && "Joystick index must be less than Joystick::Count");
     return m_joysticks[joystick].state;
@@ -80,8 +86,8 @@ void JoystickManager::update()
             if (!item.state.connected)
             {
                 item.joystick.close();
-                item.capabilities   = JoystickCaps();
-                item.state          = JoystickState();
+                item.capabilities   = Joystick::JoystickCaps();
+                item.state          = Joystick::JoystickState();
                 item.identification = Joystick::Identification();
             }
         }

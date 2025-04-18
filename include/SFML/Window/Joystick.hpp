@@ -22,6 +22,14 @@
 //
 ////////////////////////////////////////////////////////////
 
+////////////////////////////////////////////////////////////
+// ArYa Modifications
+// 1.   Joystick Caps and Joystick State have been moved
+//      JoystickImpl.hpp to here for public access
+// 2.   Inclusion of EnumArray.hpp
+// 3.   Added getCapabilities and getState
+////////////////////////////////////////////////////////////
+
 #pragma once
 
 ////////////////////////////////////////////////////////////
@@ -29,6 +37,7 @@
 ////////////////////////////////////////////////////////////
 #include <SFML/Window/Export.hpp>
 
+#include <SFML/System/EnumArray.hpp>
 #include <SFML/System/String.hpp>
 
 ////////////////////////////////////////////////////////////
@@ -72,6 +81,28 @@ struct SFML_WINDOW_API Identification
     String       name{"No Joystick"}; //!< Name of the joystick
     unsigned int vendorId{};          //!< Manufacturer identifier
     unsigned int productId{};         //!< Product identifier
+};
+
+////////////////////////////////////////////////////////////
+/// \brief Structure holding a joystick's information
+///
+////////////////////////////////////////////////////////////
+struct JoystickCaps
+{
+    unsigned int                     buttonCount{}; //!< Number of buttons supported by the joystick
+    EnumArray<Axis, bool, AxisCount> axes{};        //!< Support for each axis
+};
+
+
+////////////////////////////////////////////////////////////
+/// \brief Structure holding a joystick's state
+///
+////////////////////////////////////////////////////////////
+struct JoystickState
+{
+    bool                              connected{}; //!< Is the joystick currently connected?
+    EnumArray<Axis, float, AxisCount> axes{};      //!< Position of each axis, in range [-100, 100]
+    std::array<bool, ButtonCount>     buttons{};   //!< Status of each button (true = pressed)
 };
 
 ////////////////////////////////////////////////////////////
@@ -144,6 +175,26 @@ struct SFML_WINDOW_API Identification
 ///
 ////////////////////////////////////////////////////////////
 [[nodiscard]] SFML_WINDOW_API Identification getIdentification(unsigned int joystick);
+
+////////////////////////////////////////////////////////////
+/// \brief Get the capabilities for an open joystick
+///
+/// \param joystick Index of the joystick
+///
+/// \return Capabilities of the joystick
+///
+////////////////////////////////////////////////////////////
+[[nodiscard]] SFML_WINDOW_API JoystickCaps getCapabilities(unsigned int joystick);
+
+////////////////////////////////////////////////////////////
+/// \brief Get the current state of an open joystick
+///
+/// \param joystick Index of the joystick
+///
+/// \return Current state of the joystick
+///
+////////////////////////////////////////////////////////////
+[[nodiscard]] SFML_WINDOW_API JoystickState getState(unsigned int joystick);
 
 ////////////////////////////////////////////////////////////
 /// \brief Update the states of all joysticks

@@ -75,6 +75,17 @@ Identification getIdentification(unsigned int joystick)
     return priv::JoystickManager::getInstance().getIdentification(joystick);
 }
 
+////////////////////////////////////////////////////////////
+JoystickCaps getCapabilities(unsigned int joystick)
+{
+    return priv::JoystickManager::getInstance().getCapabilities(joystick);
+}
+
+////////////////////////////////////////////////////////////
+JoystickState getState(unsigned int joystick)
+{
+    return priv::JoystickManager::getInstance().getState(joystick);
+}
 
 ////////////////////////////////////////////////////////////
 void update()

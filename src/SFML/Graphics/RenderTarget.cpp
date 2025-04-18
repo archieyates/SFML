@@ -23,6 +23,12 @@
 ////////////////////////////////////////////////////////////
 
 ////////////////////////////////////////////////////////////
+// ArYa Modifications
+// 1.   Joystick Caps and Joystick State have been moved
+//      to Joystick.hpp so namespace has changed to reflect
+////////////////////////////////////////////////////////////
+
+////////////////////////////////////////////////////////////
 // Headers
 ////////////////////////////////////////////////////////////
 #include <SFML/Graphics/Drawable.hpp>
@@ -890,7 +896,7 @@ void RenderTarget::setupDraw(bool useVertexCache, const RenderStates& states)
 void RenderTarget::drawPrimitives(PrimitiveType type, std::size_t firstVertex, std::size_t vertexCount)
 {
     // Find the OpenGL primitive type
-    static constexpr priv::EnumArray<PrimitiveType, GLenum, 6> modes =
+    static constexpr EnumArray<PrimitiveType, GLenum, 6> modes =
         {GL_POINTS, GL_LINES, GL_LINE_STRIP, GL_TRIANGLES, GL_TRIANGLE_STRIP, GL_TRIANGLE_FAN};
     const GLenum mode = modes[type];
 

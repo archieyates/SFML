@@ -22,6 +22,12 @@
 //
 ////////////////////////////////////////////////////////////
 
+////////////////////////////////////////////////////////////
+// ArYa Modifications
+// 1.   Joystick Caps and Joystick State have been moved
+//      to Joystick.hpp
+////////////////////////////////////////////////////////////
+
 #pragma once
 
 ////////////////////////////////////////////////////////////
@@ -30,36 +36,6 @@
 #include <SFML/Config.hpp>
 
 #include <SFML/Window/Joystick.hpp>
-
-#include <SFML/System/EnumArray.hpp>
-
-
-namespace sf::priv
-{
-////////////////////////////////////////////////////////////
-/// \brief Structure holding a joystick's information
-///
-////////////////////////////////////////////////////////////
-struct JoystickCaps
-{
-    unsigned int                                         buttonCount{}; //!< Number of buttons supported by the joystick
-    EnumArray<Joystick::Axis, bool, Joystick::AxisCount> axes{};        //!< Support for each axis
-};
-
-
-////////////////////////////////////////////////////////////
-/// \brief Structure holding a joystick's state
-///
-////////////////////////////////////////////////////////////
-struct JoystickState
-{
-    bool                                                  connected{}; //!< Is the joystick currently connected?
-    EnumArray<Joystick::Axis, float, Joystick::AxisCount> axes{};      //!< Position of each axis, in range [-100, 100]
-    std::array<bool, Joystick::ButtonCount>               buttons{};   //!< Status of each button (true = pressed)
-};
-
-} // namespace sf::priv
-
 
 #if defined(SFML_SYSTEM_WINDOWS)
 

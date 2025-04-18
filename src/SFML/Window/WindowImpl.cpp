@@ -23,6 +23,12 @@
 ////////////////////////////////////////////////////////////
 
 ////////////////////////////////////////////////////////////
+// ArYa Modifications
+// 1.   Joystick Caps and Joystick State have been moved
+//      to Joystick.hpp so namespace has changed to reflect
+////////////////////////////////////////////////////////////
+
+////////////////////////////////////////////////////////////
 // Headers
 ////////////////////////////////////////////////////////////
 #include <SFML/Window/Event.hpp>
@@ -108,7 +114,7 @@ namespace sf::priv
 ////////////////////////////////////////////////////////////
 struct WindowImpl::JoystickStatesImpl
 {
-    std::array<JoystickState, Joystick::Count> states{}; //!< Previous state of the joysticks
+    std::array<Joystick::JoystickState, Joystick::Count> states{}; //!< Previous state of the joysticks
 };
 
 
@@ -292,8 +298,8 @@ void WindowImpl::processJoystickEvents()
     for (unsigned int i = 0; i < Joystick::Count; ++i)
     {
         // Copy the previous state of the joystick and get the new one
-        const JoystickState previousState = m_joystickStatesImpl->states[i];
-        m_joystickStatesImpl->states[i]   = JoystickManager::getInstance().getState(i);
+        const Joystick::JoystickState previousState = m_joystickStatesImpl->states[i];
+        m_joystickStatesImpl->states[i]             = JoystickManager::getInstance().getState(i);
 
         // Connection state
         const bool connected = m_joystickStatesImpl->states[i].connected;
@@ -311,7 +317,7 @@ void WindowImpl::processJoystickEvents()
 
         if (connected)
         {
-            const JoystickCaps caps = JoystickManager::getInstance().getCapabilities(i);
+            const Joystick::JoystickCaps caps = JoystickManager::getInstance().getCapabilities(i);
 
             // Axes
             for (unsigned int j = 0; j < Joystick::AxisCount; ++j)

@@ -22,6 +22,12 @@
 //
 ////////////////////////////////////////////////////////////
 
+////////////////////////////////////////////////////////////
+// ArYa Modifications
+// 1.   Joystick Caps and Joystick State have been moved
+//      to Joystick.hpp so namespace has changed to reflect
+////////////////////////////////////////////////////////////
+
 #pragma once
 
 ////////////////////////////////////////////////////////////
@@ -70,7 +76,7 @@ public:
     /// \return Capabilities of the joystick
     ///
     ////////////////////////////////////////////////////////////
-    [[nodiscard]] const JoystickCaps& getCapabilities(unsigned int joystick) const;
+    [[nodiscard]] const Joystick::JoystickCaps& getCapabilities(unsigned int joystick) const;
 
     ////////////////////////////////////////////////////////////
     /// \brief Get the current state of an open joystick
@@ -80,7 +86,7 @@ public:
     /// \return Current state of the joystick
     ///
     ////////////////////////////////////////////////////////////
-    [[nodiscard]] const JoystickState& getState(unsigned int joystick) const;
+    [[nodiscard]] const Joystick::JoystickState& getState(unsigned int joystick) const;
 
     ////////////////////////////////////////////////////////////
     /// \brief Get the identification for an open joystick
@@ -118,8 +124,8 @@ private:
     struct Item
     {
         JoystickImpl             joystick;       //!< Joystick implementation
-        JoystickState            state;          //!< The current joystick state
-        JoystickCaps             capabilities;   //!< The joystick capabilities
+        Joystick::JoystickState  state;          //!< The current joystick state
+        Joystick::JoystickCaps   capabilities;   //!< The joystick capabilities
         Joystick::Identification identification; //!< The joystick identification
     };
 
